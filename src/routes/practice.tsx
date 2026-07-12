@@ -101,7 +101,7 @@ function PracticePage() {
       record(note.midi, correct, responseMs, correct ? streak + 1 : streak);
       setSessionTotal((n) => n + 1);
       if (correct) {
-        playSuccess();
+        playMidiNote(note.midi);
         setFlash("correct");
         setStreak((s) => s + 1);
         setSessionCorrect((n) => n + 1);
