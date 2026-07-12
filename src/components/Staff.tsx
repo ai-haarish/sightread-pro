@@ -24,15 +24,20 @@ export function Staff({ clef, note, showCorrectLabel, flashState }: StaffProps) 
       host.innerHTML = "";
 
       const { Renderer, Stave, StaveNote, Voice, Formatter, Accidental } = VF;
-      const width = Math.min(host.clientWidth || 680, 900);
-      const height = clef === "grand" ? 280 : 210;
+      const scale = 1.35;
+      const baseWidth = Math.min(host.clientWidth || 680, 900);
+      const baseHeight = clef === "grand" ? 220 : 160;
+      const width = baseWidth;
+      const height = Math.round(baseHeight * scale);
 
       const renderer = new Renderer(host, Renderer.Backends.SVG);
       renderer.resize(width, height);
       const ctx = renderer.getContext();
+      ctx.scale(scale, scale);
       // Match theme via currentColor on SVG
       ctx.setFillStyle("currentColor");
       ctx.setStrokeStyle("currentColor");
+      const innerWidth = width / scale;
 
       const buildNote = (clefKind: string) => {
         const sn = new StaveNote({
