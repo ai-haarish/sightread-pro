@@ -4,13 +4,13 @@ import { z } from "zod";
 import { ArrowLeft, Flame, Trophy, Clock, Target } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { Staff } from "@/components/Staff";
-import { Piano } from "@/components/Piano";
+
 import { useMidi } from "@/hooks/useMidi";
 import { useSettings } from "@/hooks/useSettings";
 import { useStats } from "@/hooks/useStats";
 import { buildNotePool, pickNote, targetClefFor } from "@/lib/notePool";
 import { midiToNote, noteDisplayName, type Note } from "@/lib/music";
-import { playSuccess, playError } from "@/lib/audio";
+import { playMidiNote, playError } from "@/lib/audio";
 
 const searchSchema = z.object({
   mode: z.enum(["endless", "timed", "survival", "daily"]).catch("endless"),
@@ -101,7 +101,7 @@ function PracticePage() {
       record(note.midi, correct, responseMs, correct ? streak + 1 : streak);
       setSessionTotal((n) => n + 1);
       if (correct) {
-        playSuccess();
+        playMidiNote(note.midi);
         setFlash("correct");
         setStreak((s) => s + 1);
         setSessionCorrect((n) => n + 1);
@@ -183,9 +183,6 @@ function PracticePage() {
         )}
       </div>
 
-      <div className="mt-6">
-        <Piano pressed={midi.pressed} target={note?.midi} />
-      </div>
 
       {!midi.connected && (
         <div className="mt-4 rounded-2xl border border-dashed border-border bg-card/50 p-4 text-sm text-muted-foreground">

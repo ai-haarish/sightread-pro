@@ -36,3 +36,9 @@ export function playError() {
   tone(220, 0.18, 0, "sawtooth", 0.06); // A3 buzz
   tone(146.83, 0.22, 0.05, "sawtooth", 0.05);
 }
+
+export function playMidiNote(midi: number, duration = 0.6) {
+  const freq = 440 * Math.pow(2, (midi - 69) / 12);
+  tone(freq, duration, 0, "triangle", 0.14);
+  tone(freq * 2, duration * 0.6, 0, "sine", 0.04);
+}
