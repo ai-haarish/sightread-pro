@@ -183,9 +183,6 @@ function PracticePage() {
         )}
       </div>
 
-      <div className="mt-6">
-        <Piano pressed={midi.pressed} target={note?.midi} />
-      </div>
 
       {!midi.connected && (
         <div className="mt-4 rounded-2xl border border-dashed border-border bg-card/50 p-4 text-sm text-muted-foreground">
