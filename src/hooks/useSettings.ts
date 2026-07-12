@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Clef } from "./music";
-import { loadJSON, saveJSON } from "./storage";
+import type { Clef } from "@/lib/music";
+import { loadJSON, saveJSON } from "@/lib/storage";
 
 export interface Settings {
   clef: Clef;
