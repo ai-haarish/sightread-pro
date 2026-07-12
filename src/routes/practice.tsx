@@ -4,7 +4,7 @@ import { z } from "zod";
 import { ArrowLeft, Flame, Trophy, Clock, Target } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { Staff } from "@/components/Staff";
-import { Piano } from "@/components/Piano";
+
 import { useMidi } from "@/hooks/useMidi";
 import { useSettings } from "@/hooks/useSettings";
 import { useStats } from "@/hooks/useStats";
