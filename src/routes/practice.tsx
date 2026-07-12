@@ -10,7 +10,7 @@ import { useSettings } from "@/hooks/useSettings";
 import { useStats } from "@/hooks/useStats";
 import { buildNotePool, pickNote, targetClefFor } from "@/lib/notePool";
 import { midiToNote, noteDisplayName, type Note } from "@/lib/music";
-import { playSuccess, playError } from "@/lib/audio";
+import { playMidiNote, playError } from "@/lib/audio";
 
 const searchSchema = z.object({
   mode: z.enum(["endless", "timed", "survival", "daily"]).catch("endless"),
