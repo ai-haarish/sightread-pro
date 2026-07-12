@@ -98,7 +98,7 @@ function PracticePage() {
       if (!note || gameOver) return;
       const responseMs = Date.now() - questionStart.current;
       const correct = midi === note.midi;
-      record(midi === note.midi ? note.midi : note.midi, correct, responseMs, correct ? streak + 1 : streak);
+      record(note.midi, correct, responseMs, correct ? streak + 1 : streak);
       setSessionTotal((n) => n + 1);
       if (correct) {
         playSuccess();
