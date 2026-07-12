@@ -24,8 +24,8 @@ export function Staff({ clef, note, showCorrectLabel, flashState }: StaffProps) 
       host.innerHTML = "";
 
       const { Renderer, Stave, StaveNote, Voice, Formatter, Accidental } = VF;
-      const width = Math.min(host.clientWidth || 520, 720);
-      const height = clef === "grand" ? 220 : 160;
+      const width = Math.min(host.clientWidth || 680, 900);
+      const height = clef === "grand" ? 280 : 210;
 
       const renderer = new Renderer(host, Renderer.Backends.SVG);
       renderer.resize(width, height);
