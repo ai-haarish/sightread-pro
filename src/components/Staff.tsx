@@ -52,10 +52,9 @@ export function Staff({ clef, note, showCorrectLabel, flashState }: StaffProps) 
       };
 
       const drawStave = (clefKind: "treble" | "bass" | "alto" | "tenor", y: number) => {
-        const stave = new Stave(20, y, width - 40);
+        const stave = new Stave(20, y, innerWidth - 40);
         stave.addClef(clefKind);
         stave.setContext(ctx).draw();
-        // Only place the note on the stave whose range contains the midi
         const belongs =
           clef === "grand"
             ? clefKind === "treble"
@@ -66,7 +65,7 @@ export function Staff({ clef, note, showCorrectLabel, flashState }: StaffProps) 
           const sn = buildNote(clefKind);
           const voice = new Voice({ numBeats: 1, beatValue: 4 }).setStrict(false);
           voice.addTickables([sn]);
-          new Formatter().joinVoices([voice]).format([voice], width - 120);
+          new Formatter().joinVoices([voice]).format([voice], innerWidth - 120);
           voice.draw(ctx, stave);
         }
       };
