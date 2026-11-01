@@ -10,7 +10,7 @@ export interface Settings {
   naturals: boolean;
   rangeMin: number;
   rangeMax: number;
-  difficulty: "easy" | "medium" | "hard";
+  difficulty: "easy" | "medium" | "hard" | "custom";
   nextNoteDelayMs: number;
   theme: "light" | "dark" | "system";
 }

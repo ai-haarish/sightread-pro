@@ -30,10 +30,6 @@ export function useMidi(options: UseMidiOptions = {}) {
   const callbacksRef = useRef({ onNoteOn, onNoteOff });
   callbacksRef.current = { onNoteOn, onNoteOff };
 
-  useEffect(() => {
-    setSupported(typeof navigator !== "undefined" && "requestMIDIAccess" in navigator);
-  }, []);
-
   const handleMessage = (msg: MIDIMessageEvent) => {
     const data = msg.data;
     if (!data || data.length < 3) return;
@@ -55,7 +51,6 @@ export function useMidi(options: UseMidiOptions = {}) {
       });
       callbacksRef.current.onNoteOff?.(note);
     }
-    // Ignore CC (0xB0) — includes sustain pedal (CC 64).
   };
 
   const attachInputs = (access: MidiAccessLike) => {
@@ -69,7 +64,7 @@ export function useMidi(options: UseMidiOptions = {}) {
   };
 
   const connect = async () => {
-    if (!("requestMIDIAccess" in navigator)) {
+    if (typeof navigator === "undefined" || !("requestMIDIAccess" in navigator)) {
       setError("Web MIDI is not supported in this browser.");
       return;
     }
@@ -83,6 +78,15 @@ export function useMidi(options: UseMidiOptions = {}) {
       setError(e instanceof Error ? e.message : "Unable to access MIDI.");
     }
   };
+
+  useEffect(() => {
+    const isSupported = typeof navigator !== "undefined" && "requestMIDIAccess" in navigator;
+    setSupported(isSupported);
+    if (isSupported) {
+      // Auto-connect if permission is available
+      connect();
+    }
+  }, []);
 
   return { supported, connected, devices, error, pressed, connect };
 }
